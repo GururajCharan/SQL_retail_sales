@@ -1,36 +1,87 @@
-# 📊 SQL Retail Sales Analysis
+# 📊 Retail Sales Analysis SQL Project
+
+![SQL](https://img.shields.io/badge/SQL-PostgreSQL-blue)
+![Project](https://img.shields.io/badge/Project-Data%20Analysis-green)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![Level](https://img.shields.io/badge/Level-Beginner-orange)
+
+---
 
 ## 🚀 Project Overview
 
-This project focuses on analyzing retail sales data using SQL. It demonstrates a complete data analysis workflow including **data cleaning, exploration, and business insight generation**.
+**Project Title**: Retail Sales Analysis
+**Level**: Beginner
+**Database**: `p1_retail_db`
 
-The goal is to extract meaningful insights from raw transactional data to support **data-driven decision-making**.
+This project demonstrates essential SQL skills used in real-world data analysis. It covers the complete workflow including **database setup, data cleaning, exploratory data analysis (EDA), and business insights generation**.
+
+It is designed for beginners aiming to build a strong foundation in SQL and data analytics.
+
+---
+
+## 🎯 Objectives
+
+* 🏗️ Set up a structured retail sales database
+* 🧹 Clean and preprocess raw data
+* 🔍 Perform exploratory data analysis (EDA)
+* 📊 Solve business problems using SQL queries
+* 💡 Generate actionable insights
 
 ---
 
 ## 🗂️ Dataset Description
 
-| Column Name     | Description           |
-| --------------- | --------------------- |
-| transactions_id | Unique transaction ID |
-| sale_date       | Date of transaction   |
-| sale_time       | Time of transaction   |
-| customer_id     | Unique customer ID    |
-| gender          | Customer gender       |
-| age             | Customer age          |
-| category        | Product category      |
-| quantity        | Number of items sold  |
-| price_per_unit  | Price per item        |
-| cogs            | Cost of goods sold    |
-| total_sale      | Total sale value      |
+| Column Name     | Description             |
+| --------------- | ----------------------- |
+| transactions_id | Unique transaction ID   |
+| sale_date       | Date of transaction     |
+| sale_time       | Time of transaction     |
+| customer_id     | Unique customer ID      |
+| gender          | Customer gender         |
+| age             | Customer age            |
+| category        | Product category        |
+| quantity        | Items sold              |
+| price_per_unit  | Price per item          |
+| cogs            | Cost of goods sold      |
+| total_sale      | Total transaction value |
+
+---
+
+## 🏗️ Database Setup
+
+```sql
+CREATE DATABASE p1_retail_db;
+
+CREATE TABLE retail_sales (
+    transactions_id INT PRIMARY KEY,
+    sale_date DATE,
+    sale_time TIME,
+    customer_id INT,
+    gender VARCHAR(15),
+    age INT,
+    category VARCHAR(35),
+    quantity INT,
+    price_per_unit FLOAT,
+    cogs FLOAT,
+    total_sale FLOAT
+);
+```
 
 ---
 
 ## 🧹 Data Cleaning
 
-✔ Removed records with missing values
+✔ Removed records with NULL values
 ✔ Ensured data consistency
-✔ Validated key columns before analysis
+✔ Validated dataset before analysis
+
+```sql
+DELETE FROM retail_sales
+WHERE 
+    sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
+    gender IS NULL OR age IS NULL OR category IS NULL OR 
+    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL OR total_sale IS NULL;
+```
 
 ---
 
@@ -39,46 +90,12 @@ The goal is to extract meaningful insights from raw transactional data to suppor
 ### 📌 Basic Insights
 
 * Total number of sales
-* Total customers
+* Total unique customers
 * Distinct product categories
 
-### 📌 Business Questions Solved
-
-* 📅 Sales on a specific date
-* 👕 High-quantity clothing transactions
-* 💰 Total sales per category
-* 👥 Customer demographics (average age)
-* 💸 High-value transactions (>1000)
-* ⚧️ Transactions by gender & category
-
----
-
-## 📈 Advanced Analysis
-
-### 🏆 Best Selling Month Per Year
-
-Used window functions to identify top-performing months.
-
-### 👑 Top 5 Customers
-
-Identified customers contributing the highest revenue.
-
-### 🧍 Unique Customers Per Category
-
-Measured customer distribution across categories.
-
-### ⏰ Sales by Time Shift
-
-* 🌅 Morning (<12)
-* ☀️ Afternoon (12–17)
-* 🌙 Evening (>17)
-
----
-
-## 🛠️ SQL Skills Demonstrated
+### 📌 Sample Query
 
 ```sql
--- Example Query
 SELECT 
     category,
     SUM(total_sale) AS net_sale,
@@ -87,9 +104,30 @@ FROM retail_sales
 GROUP BY category;
 ```
 
+---
+
+## 📈 Business Analysis Queries
+
+### 🏆 Key Problems Solved
+
+* 📅 Sales on a specific date
+* 👕 High-quantity clothing transactions
+* 💰 Total sales per category
+* 👥 Average age of customers (category-wise)
+* 💸 High-value transactions (>1000)
+* ⚧️ Transactions by gender and category
+* 📊 Monthly sales trends & best-performing month
+* 👑 Top 5 customers by total sales
+* 🧍 Unique customers per category
+* ⏰ Sales distribution by time shifts
+
+---
+
+## 🔥 Advanced SQL Concepts Used
+
 ✔ Aggregations (`SUM`, `COUNT`, `AVG`)
-✔ `GROUP BY`, `ORDER BY`
-✔ Window Functions (`RANK()`)
+✔ `GROUP BY`, `ORDER BY`, `LIMIT`
+✔ Window Functions (`RANK() OVER`)
 ✔ Date Functions (`EXTRACT`, `TO_CHAR`)
 ✔ CTEs (Common Table Expressions)
 
@@ -97,10 +135,19 @@ GROUP BY category;
 
 ## 📊 Key Insights
 
-✨ Identified top-performing categories
-✨ Found high-value customers
-✨ Discovered peak sales periods
-✨ Analyzed customer behavior trends
+✨ Identified top-performing product categories
+✨ Discovered high-value customers
+✨ Analyzed peak sales months
+✨ Understood customer purchase behavior
+✨ Observed time-based sales patterns
+
+---
+
+## 📑 Reports Generated
+
+* 📊 Sales Summary Report
+* 📈 Monthly Trend Analysis
+* 👥 Customer Insights Report
 
 ---
 
@@ -111,13 +158,25 @@ GROUP BY category;
 
 ---
 
-## 📌 How to Run
+## ⚙️ How to Use
 
 ```bash
-# Step 1: Create table
+# 1. Clone the repository
+git clone <your-repo-link>
+
+# 2. Create database & table
 Run the SQL script
 
-# Step 2: Insert dataset
+# 3. Insert dataset
 
-# Step 3: Execute queries
+# 4. Execute queries
 ```
+
+---
+
+## 🎯 Project Value
+
+✔ Beginner-friendly SQL project
+✔ Strong portfolio addition
+✔ Covers real-world business scenarios
+
