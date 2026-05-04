@@ -3,7 +3,6 @@
 ![SQL](https://img.shields.io/badge/SQL-PostgreSQL-blue)
 ![Project](https://img.shields.io/badge/Project-Data%20Analysis-green)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
-![Level](https://img.shields.io/badge/Level-Beginner-orange)
 
 ---
 
